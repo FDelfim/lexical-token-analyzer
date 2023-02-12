@@ -16,6 +16,7 @@ public class Main {
             while(sc.hasNextLine()){
                 programa += sc.next() + "\n";
             }
+            sc.close();
         }catch(Exception e){
             System.out.println("Erro ao abrir o arquivo");
         }

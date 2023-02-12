@@ -22,8 +22,9 @@ public class Lexer {
         String fluxoRegex = "if|else|while|return|System\\.out\\.println";
         String tipoRegex = "boolean|int |true|false|String";
         String idRegex = "[a-zA-Z][a-zA-Z0-9]*";
-        String commentRegex = "/\\*.*?\\*/";
+        String commentRegex = "\\/\\*([\\s\\S]*?)\\*\\/";
         String stringRegex = "\".*?\"";
+        String commentRegex2 = "\\/\\/.*";
         // Compila os padrões de expressão regular
         Pattern opPattern = Pattern.compile(opRegex);
         Pattern delimPattern = Pattern.compile(delimRegex);
@@ -31,9 +32,9 @@ public class Lexer {
         Pattern fluxoPattern = Pattern.compile(fluxoRegex);
         Pattern tipoPattern = Pattern.compile(tipoRegex);
         Pattern idPattern = Pattern.compile(idRegex);
-        Pattern commentPattern = Pattern.compile(commentRegex);
+        Pattern commentPattern = Pattern.compile(commentRegex + "|" + commentRegex2);
         // Procurar e analisar cada token no programa
-        String program = program_original.replaceAll(commentRegex, "/* */").replaceAll(stringRegex, "\" \"");
+        String program = program_original.replaceAll(commentRegex, "/* */").replaceAll(stringRegex, "\" \"").replaceAll(commentRegex2, "//");
         System.out.println(program); 
         // retira o conteudo de todos comentários.
         Matcher matcher = commentPattern.matcher(program);
@@ -41,8 +42,8 @@ public class Lexer {
             String word = matcher.group();
             addOccurrence("Coment", word);
         }
-        program = program.replaceAll(commentRegex, " ").replaceAll(stringRegex, ""); 
-        // retira todos comentários com /* */.
+        program = program.replaceAll(commentRegex, " ").replaceAll(stringRegex, " ").replaceAll(commentRegex2, " "); 
+        // retira todos comentários com /* */ e \\.
 
         matcher = opPattern.matcher(program);
         while (matcher.find()) {
