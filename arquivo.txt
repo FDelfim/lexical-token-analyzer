@@ -7,19 +7,22 @@ public class Main {
     public static void main(String[] args) {
 
         String programa = "";
-
         try{
             File file = new File("arquivo.txt");
             Scanner sc = new Scanner(file);
-            sc.useDelimiter("\\n");
 
             while(sc.hasNextLine()){
-                programa += sc.next() + "\n";
+                programa += sc.nextLine().split("\n");
             }
         }catch(Exception e){
             System.out.println("Erro ao abrir o arquivo");
         }
 
+        /*
+            teste
+        */
+        // teste
+        // teste
         Lexer lexer = new Lexer();
         lexer.analyze(programa);
         lexer.printTokens();

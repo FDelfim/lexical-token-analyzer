@@ -23,6 +23,7 @@ public class Lexer {
         String tipoRegex = "boolean|int |true|false|String";
         String idRegex = "[a-zA-Z][a-zA-Z0-9]*";
         String commentRegex = "/\\*.*?\\*/";
+        String stringRegex = "\".*?\"";
         // Compila os padrões de expressão regular
         Pattern opPattern = Pattern.compile(opRegex);
         Pattern delimPattern = Pattern.compile(delimRegex);
@@ -32,7 +33,7 @@ public class Lexer {
         Pattern idPattern = Pattern.compile(idRegex);
         Pattern commentPattern = Pattern.compile(commentRegex);
         // Procurar e analisar cada token no programa
-        String program = program_original.replaceAll(commentRegex, "/* */");
+        String program = program_original.replaceAll(commentRegex, "/* */").replaceAll(stringRegex, "\" \"");
         System.out.println(program); 
         // retira o conteudo de todos comentários.
         Matcher matcher = commentPattern.matcher(program);
@@ -40,7 +41,7 @@ public class Lexer {
             String word = matcher.group();
             addOccurrence("Coment", word);
         }
-        program = program.replaceAll(commentRegex, " "); 
+        program = program.replaceAll(commentRegex, " ").replaceAll(stringRegex, ""); 
         // retira todos comentários com /* */.
 
         matcher = opPattern.matcher(program);
@@ -86,8 +87,6 @@ public class Lexer {
             String word = matcher.group();
             addOccurrence("ID", word);
         }
-        
-        
     }
 
     // Adiciona o token à lista de ocorrências
