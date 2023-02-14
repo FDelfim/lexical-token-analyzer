@@ -20,7 +20,7 @@ public class Lexer {
         String delimRegex = "[(){}\\[\\];]";
         String declRegex = "class|extends|public|static|void|main|length|this|new";
         String fluxoRegex = "if|else|while|return|System\\.out\\.println";
-        String tipoRegex = "boolean|int |true|false|String";
+        String tipoRegex = "boolean|int |true|false|String|float |double |char ";
         String idRegex = "[a-zA-Z][a-zA-Z0-9]*";
         String commentRegex = "\\/\\*([\\s\\S]*?)\\*\\/";
         String stringRegex = "\".*?\"";
@@ -101,7 +101,7 @@ public class Lexer {
 
     // Imprime a lista de ocorrências de cada token
     public void printTokens() {
-        for (String token : occurrences.keySet()) {
+        for(String token : occurrences.keySet()) {
             System.out.println("<" + token + " => número de ocorrências " + occurrences.get(token));
         }
     }
