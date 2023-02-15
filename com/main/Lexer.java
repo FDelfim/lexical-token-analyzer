@@ -16,7 +16,7 @@ public class Lexer {
     // Analisador léxico
     public void analyze(String program_original) {
         // Padrões de expressão regular para cada token
-        String opRegex = "[+\\-*/<!.,=&&]";
+        String opRegex = "\\+|\\-|\\*|\\/|\\<|\\!|\\.|\\,|\\=|\\&\\&";
         String delimRegex = "[(){}\\[\\];]";
         String declRegex = "class|extends|public|static|void|main|length|this|new";
         String fluxoRegex = "if|else|while|return|System\\.out\\.println";
